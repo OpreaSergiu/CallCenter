@@ -51,12 +51,10 @@
                     <tr>
                         <td><b>Account Number:</b> @test</td>
                         <td><b>Client Reference:</b> @test</td>
-                        <td><b>Client ID:</b> @test</td>
                     </tr>
                     <tr>
                         <td><b>Name:</b> Testea Testosu</td>
-                        <td><b>Country:</b> ROU</td>
-                        <td><b>Time zone:</b> USA/NY</td>
+                        <td><b>Client ID:</b> @test</td>
                     </tr>
                 </tbody>
             </table>
@@ -96,23 +94,23 @@
             <div>
                 <table class="table table-striped table-bordered">
                     <thead>
-                    <tr>
-                        <th>Prefix</th>
-                        <th>Phone Number</th>
-                        <th>Extension</th>
-                        <th>Click to dial</th>
-                    </tr>
+                        <tr>
+                            <th>Prefix</th>
+                            <th>Phone Number</th>
+                            <th>Extension</th>
+                            <th>Click to dial</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (var line in phoneNumbers)
-                    {
-                        <tr>
-                            <td class="filterable-cell">+44</td>
-                            <td class="filterable-cell">@line</td>
-                            <td class="filterable-cell">  </td>
-                            <td class="filterable-cell"><button type="button" class="btn btn-primary">Call</button></td>
-                        </tr>
-                    }
+                        @foreach (var line in phoneNumbers)
+            {
+                <tr>
+                    <td class="filterable-cell">+44</td>
+                    <td class="filterable-cell">@line</td>
+                    <td class="filterable-cell">  </td>
+                    <td class="filterable-cell"><button type="button" class="btn btn-primary">Call</button></td>
+                </tr>
+}
                     </tbody>
                 </table>
             </div>
@@ -120,13 +118,13 @@
         <div class="col-sm-7 sidenav">
             <div class="container">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#history">History</a></li>
+                    <li class="active"><a data-toggle="tab" href="#acctDetails">Account Details</a></li>
+                    <li><a data-toggle="tab" href="#history">History</a></li>
                     <li><a data-toggle="tab" href="#invoices">Invoices</a></li>
-                    <li><a data-toggle="tab" href="#acctDetails">Account Details</a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div id="history" class="tab-pane fade in active" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
+                    <div id="history" class="tab-pane fade" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -180,7 +178,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="acctDetails" class="tab-pane fade" style="height: 400px;">
+                    <div id="acctDetails" class="tab-pane fade in active" style="height: 400px;">
                         <table class="table">
                             <tbody>
                                 <tr>
@@ -192,14 +190,22 @@
                                 <tr>
                                     <td><b>Address:</b> @test</td>
                                 </tr>
+                            <tr>
+                                <td><b>Email:</b> @test</td>
+                            </tr>
+                            <tr>
+                                <td><b>Country:</b> ROU</td>
+                            </tr>
+                            <tr>
+                                <td><b>Time zone:</b> USA/NY</td>
+                            </tr>
                                 <tr>
-                                    <td><b>Email:</b> @test</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Phone1:</b> @test</td>
-                                </tr>
-                                <tr>
-                                    <td><b>Phone2:</b> @test</td>
+                                    <td>
+                                        <br/>
+                                        <span class="wtb-ew-v1" style="width: 369px; display: inline-block">
+                                            <script src="https://www.worldtimebuddy.com/clock_widget.js?h=1816670&bc=999999&cn=&wt=c2"></script><i><a href="https://www.worldtimebuddy.com/">World Clock</a></i><noscript><a href="https://www.worldtimebuddy.com/">World Clock</a></noscript>
+                                            <script>window[wtb_event_widgets.pop()].init()</script></span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
