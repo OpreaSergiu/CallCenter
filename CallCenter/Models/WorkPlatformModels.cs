@@ -5,7 +5,7 @@ using System.Web;
 
 namespace CallCenter.Models
 {
-    public class WorkPlatform
+    public class WorkPlatformModels
     {
         public int AccountNumber { get; set; }
         public string ClientReference { get; set; }
