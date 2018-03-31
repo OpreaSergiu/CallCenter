@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CallCenter.Controllers
 {
+    [Authorize]
     public class ClientPortalController : Controller
     {
         public ActionResult Index()
