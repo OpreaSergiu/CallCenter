@@ -12,5 +12,13 @@ namespace CallCenter.Controllers
         {
             return View();
         }
+        public ActionResult Trust()
+        {
+            return View();
+        }
+        public ActionResult NewBusiness()
+        {
+            return View();
+        }
     }
 }

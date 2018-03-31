@@ -12,5 +12,13 @@ namespace CallCenter.Controllers
         {
             return View();
         }
+        public ActionResult Audit()
+        {
+            return View();
+        }
+        public ActionResult Reports()
+        {
+            return View();
+        }
     }
 }

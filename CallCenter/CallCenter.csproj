@@ -216,6 +216,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\banner1b.jpg" />
+    <Content Include="Images\banner2.jpg" />
+    <Content Include="Images\banner3.jpg" />
+    <Content Include="Images\banner4.jpg" />
+    <Content Include="Images\facebook.png" />
+    <Content Include="Images\googleplus.png" />
+    <Content Include="Images\linkedin.png" />
+    <Content Include="Images\twitter.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -269,6 +277,10 @@
     <Content Include="Views\WorkPlatform\Index.cshtml" />
     <Content Include="Views\Backoffice\Index.cshtml" />
     <Content Include="Views\ClientPortal\Index.cshtml" />
+    <Content Include="Views\ClientPortal\Audit.cshtml" />
+    <Content Include="Views\ClientPortal\Reports.cshtml" />
+    <Content Include="Views\Backoffice\Newbusiness.cshtml" />
+    <Content Include="Views\Backoffice\Trust.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

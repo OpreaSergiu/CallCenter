@@ -2,45 +2,28 @@
     ViewBag.Title = "Work Platform";
     var history = new string[]
     {
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas",
-        "a: asa",
-        "b: fadas"
+        "TEST",
+        "TEST",
+        "TEST",
+        "TEST",
+        "TEST",
+        "TEST",
+        "TEST"
     };
+
+    var invoices = new string[]
+    {
+        "TEST",
+    };
+
     var test =  new int();
     test = 500;
     var phoneNumbers = new string[]
     {
         "0768251685",
-        "0768251685"
+        "0351429800"
     };
 }
-
-<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-</head>
 <body>
 <div class="container-fluid text-center">
     <div class="row content">
@@ -53,7 +36,7 @@
                         <td><b>Client Reference:</b> @test</td>
                     </tr>
                     <tr>
-                        <td><b>Name:</b> Testea Testosu</td>
+                        <td><b>Name:</b> Test Testing</td>
                         <td><b>Client ID:</b> @test</td>
                     </tr>
                 </tbody>
@@ -69,25 +52,25 @@
                     <td><b>Desk:</b></td>
                     <td>SOP</td>
                     <td><b>Assign amount:</b></td>
-                    <td>@test</td>
+                    <td>500</td>
                 </tr>
                 <tr>
                     <td><b>Status:</b></td>
                     <td>CLOSED</td>
                     <td><b>Total Received:</b></td>
-                    <td>@test</td>
+                    <td>300</td>
                 </tr>
                 <tr>
                     <td><b>Assign Date:</b></td>
                     <td>2018-01-01</td>
                     <td><b>Other Due:</b></td>
-                    <td>@test</td>
+                    <td>0</td>
                 </tr>
                 <tr>
                     <td><b>Last Worked Date:</b></td>
                     <td>2018-01-01</td>
                     <td><b>Total Due:</b></td>
-                    <td>@test</td>
+                    <td>200</td>
                 </tr>
                 </tbody>
             </table>
@@ -145,7 +128,7 @@
                                     <td class="filterable-cell">@line</td>
                                     <td class="filterable-cell">@line</td>
                                     <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell" style="word-break:break-all;">nfsadhf jhdsihfjhf hhdsfhsjhfhsd jgbfhdsf kljhhhh hhhhhhhhh hhhhh hhhhh hhhhhhhhhhaaaaaaaa aaaaaaaaaaaaaaaaaaaaa</td>
+                                    <td class="filterable-cell">This guy never answers the phone, he does not want to give us the money back. I will lose my job.</td>
                                 </tr>
                             }
                             </tbody>
@@ -164,15 +147,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach (var line in history)
+                            @foreach (var line in invoices)
                             {
                                 <tr>
-                                    <td class="filterable-cell" style="word-break:keep-all ;">2018/01/01 11:30</td>
-                                    <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell" style="word-break:break-all;">nfsadhf jhdsihfjhf hhdsfhsjhfhsd jgbfhdsf kljhhhh hhhhhhhhh hhhhh hhhhh hhhhhhhhhhaaaaaaaa aaaaaaaaaaaaaaaaaaaaa</td>
+                                    <td class="filterable-cell" style="word-break:keep-all ;">2018/01/01</td>
+                                    <td class="filterable-cell">75898785</td>
+                                    <td class="filterable-cell">500</td>
+                                    <td class="filterable-cell">200</td>
+                                    <td class="filterable-cell">ACTIVE</td>
+                                    <td class="filterable-cell" style="word-break:keep-all ;">2018/01/01</td>
                                 </tr>
                             }
                             </tbody>
@@ -182,19 +165,20 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td><b>Full Name:</b> @test</td>
+                                    <td><b>Full Name:</b> Tester Testing Test</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Contact:</b> @test</td>
+                                    <td><b>Contact:</b> Mr.Test</td>
                                 </tr>
                                 <tr>
-                                    <td><b>Address:</b> @test</td>
+                                    <td><b>Address:</b> 123 6th St. 
+                                        Melbourne, FL 32904</td>
                                 </tr>
                             <tr>
-                                <td><b>Email:</b> @test</td>
+                                <td><b>Email:</b> test@test.com</td>
                             </tr>
                             <tr>
-                                <td><b>Country:</b> ROU</td>
+                                <td><b>Country:</b> USA</td>
                             </tr>
                             <tr>
                                 <td><b>Time zone:</b> USA/NY</td>
@@ -203,7 +187,7 @@
                                     <td>
                                         <br/>
                                         <span class="wtb-ew-v1" style="width: 369px; display: inline-block">
-                                            <script src="https://www.worldtimebuddy.com/clock_widget.js?h=1816670&bc=999999&cn=&wt=c2"></script><i><a href="https://www.worldtimebuddy.com/">World Clock</a></i><noscript><a href="https://www.worldtimebuddy.com/">World Clock</a></noscript>
+                                            <script src="https://www.worldtimebuddy.com/clock_widget.js?h=5128581&bc=8BA1BB&cn=&wt=c2"></script><i><a href="https://www.worldtimebuddy.com/">World Clock</a></i><noscript><a href="https://www.worldtimebuddy.com/">World Clock</a></noscript>
                                             <script>window[wtb_event_widgets.pop()].init()</script></span>
                                     </td>
                                 </tr>
@@ -236,11 +220,10 @@
         </div>
         <br />
         <div class="form-group mx-auto" style="padding: 8px;">
-            <input type="text" class="form-control" id="note" placeholder="Note" name="note" style="width: 560px">
+            <input type="text" class="form-control" id="note" placeholder="Note" name="note" >
         </div>
         <br />
         <button type="submit" class="btn">Save changes</button>
     </form>
 </div>
 </body>
-</html>
