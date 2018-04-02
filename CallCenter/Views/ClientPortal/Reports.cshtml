@@ -2,3 +2,34 @@
 @{
     ViewBag.Title = "Reports";
 }
+<br>
+<div class="row content">
+    <div class="col-sm-4 text-left">
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Inventory Report</button>
+        <div id="demo1" class="collapse">
+            Report that contains basic informations about the whole inventory (Account number, Client reference, Desk, Status, Total assign, Total due)
+            <br>
+            <button type="button" class="btn btn-primary">Create Report</button>
+        </div>
+        <br>
+        <br>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Recovery report</button>
+        <div id="demo2" class="collapse">
+            Recovery report containing charts for last 12 months including current.
+            <br>
+            <button type="button" class="btn btn-primary">Create Report</button>
+        </div>
+        <br>
+        <br>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Notes Report</button>
+        <div id="demo3" class="collapse">
+            Report showing notes history for a specific account.
+            <br>
+            <div class="form-group">
+                <label for="accn">Account Number/Client Reference:</label>
+                <input type="text" class="form-control" id="accn">
+            </div>
+            <button type="button" class="btn btn-primary">Create Report</button>
+        </div>
+    </div>
+</div>

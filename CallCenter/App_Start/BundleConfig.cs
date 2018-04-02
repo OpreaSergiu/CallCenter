@@ -26,6 +26,9 @@ namespace CallCenter
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-darky.css",
                       "~/Content/MyCSS.css"));
+
+            bundles.Add(new StyleBundle("~/Test/css").Include(
+                "~/Content/bootstrap-darky.css"));
         }
     }
 }
