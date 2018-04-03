@@ -3,5 +3,48 @@
     ViewBag.Title = "Trust";
 }
 
-<h2>Trust</h2>
+<hr/>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-6 text-left">
+            <p>
+                EXPECTED FORMAT:
+                <br />
+                File format needs to be <b>csv</b>.
+                <br />
+                Column order does not matter and column names are case insensitive for all columns.
+                <br />
+                The following columns are <b>required</b>:
+                <br />
+                <code>acc_number, inv_number, amount</code>
+            </p>
+            <form id="upload" action="index.html" method="POST" enctype="multipart/form-data">
 
+                <fieldset>
+                    <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+                    <div>
+                        <label for="fileselect">Files to upload:</label>
+                        <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+        <div class="col-sm-6 text-left">
+            <b>Batch Result:</b>
+            <br />
+            <div class="well">
+                <p>
+                    3 Invoices processed
+                    <br/>
+                    -------------------------
+                    <br/>
+                    900 Total payment amount
+                </p>
+            </div>
+            <button type="button" class="btn">Commit Results</button>
+            <button type="button" class="btn">Ignore Results</button>
+        </div>
+    </div>
+</div>
