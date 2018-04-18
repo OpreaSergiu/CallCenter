@@ -135,15 +135,23 @@
                         </thead>
                         <tbody>
                             @foreach (var line in phoneNumbers)
-                            {
-                                <tr>
-                                    <td class="filterable-cell">+44</td>
-                                    <td class="filterable-cell">@line</td>
-                                    <td class="filterable-cell"> </td>
-                                </tr>
-                            }
+                {
+                    <tr>
+                        <td class="filterable-cell">+44</td>
+                        <td class="filterable-cell">@line</td>
+                        <td class="filterable-cell"> </td>
+                    </tr>
+    }
                         </tbody>
                     </table>
+                </div>
+                <div align="center">
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Notes Report</button>
+                    <div id="demo3" class="collapse">
+                        Report showing notes history for a specific account.
+                        <br>
+                        <button type="button" class="btn btn-primary">Create Report</button>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-7 sidenav">

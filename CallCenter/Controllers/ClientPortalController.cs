@@ -21,5 +21,9 @@ namespace CallCenter.Controllers
         {
             return View();
         }
+        public ActionResult Payments()
+        {
+            return View();
+        }
     }
 }

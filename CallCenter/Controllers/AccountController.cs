@@ -79,7 +79,7 @@ namespace CallCenter.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal("/WorkPlatform");
+                    return RedirectToLocal("/WorkPlatform/Index/0");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

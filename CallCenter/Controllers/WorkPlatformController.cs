@@ -9,8 +9,9 @@ namespace CallCenter.Controllers
     [Authorize]
     public class WorkPlatformController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
+            ViewData["id"] = id;
             return View();
         }
     }

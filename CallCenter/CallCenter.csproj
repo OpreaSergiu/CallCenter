@@ -282,6 +282,7 @@
     <Content Include="Views\Backoffice\Newbusiness.cshtml" />
     <Content Include="Views\Backoffice\Trust.cshtml" />
     <Content Include="Views\Backoffice\PaymentRequest.cshtml" />
+    <Content Include="Views\ClientPortal\Payments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
