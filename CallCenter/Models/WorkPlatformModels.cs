@@ -7,7 +7,7 @@ namespace CallCenter.Models
 {
     public class WorkPlatformModels
     {
-        public int AccountNumber { get; set; }
+        public int Id { get; set; }
         public string ClientReference { get; set; }
         public string ClientID { get; set; }
         public string Name { get; set; }
