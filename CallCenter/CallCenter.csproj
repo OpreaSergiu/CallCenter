@@ -191,6 +191,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AspNetRole.cs" />
+    <Compile Include="AspNetUser.cs" />
+    <Compile Include="AspNetUserClaim.cs" />
+    <Compile Include="AspNetUserLogin.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BackofficeController.cs" />
@@ -198,13 +202,32 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WorkPlatformController.cs" />
+    <Compile Include="Controllers\WorkPlatformModelsController.cs" />
+    <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804241133284_InitialCreate.cs" />
+    <Compile Include="Migrations\201804241133284_InitialCreate.Designer.cs">
+      <DependentUpon>201804241133284_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804241604508_test.cs" />
+    <Compile Include="Migrations\201804241604508_test.Designer.cs">
+      <DependentUpon>201804241604508_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804241614236_test1.cs" />
+    <Compile Include="Migrations\201804241614236_test1.Designer.cs">
+      <DependentUpon>201804241614236_test1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddressModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InvoiceModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NotesModels.cs" />
+    <Compile Include="Models\PhoneModels.cs" />
     <Compile Include="Models\WorkPlatformModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -329,6 +352,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\WorkPlatformModels\Create.cshtml" />
+    <Content Include="Views\WorkPlatformModels\Delete.cshtml" />
+    <Content Include="Views\WorkPlatformModels\Details.cshtml" />
+    <Content Include="Views\WorkPlatformModels\Edit.cshtml" />
+    <Content Include="Views\WorkPlatformModels\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -344,6 +372,17 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804241133284_InitialCreate.resx">
+      <DependentUpon>201804241133284_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241604508_test.resx">
+      <DependentUpon>201804241604508_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241614236_test1.resx">
+      <DependentUpon>201804241614236_test1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
