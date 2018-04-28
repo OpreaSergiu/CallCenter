@@ -22,18 +22,26 @@ namespace CallCenter.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //WorkPlatformModels workPlatformModels = db.WorkPlatformModels.Find(id);
 
-            PhoneModels PhoneModels = db.PhoneModels.Find(id);
+            string query_phones = "SELECT * FROM PhoneModels WHERE AccountNumber = @p0 ";
+            string query_address = "SELECT * FROM AddressModels WHERE AccountNumber = @p0 ";
+            string query_invoices = "SELECT * FROM InvoiceModels WHERE AccountNumber = @p0 ";
+            string query_notes = "SELECT * FROM NotesModels WHERE AccountNumber = @p0 ";
 
-            string query = "SELECT * FROM PhoneModels WHERE AccountNumber = @p0 ";
-            IEnumerable<PhoneModels> data = db.Database.SqlQuery<PhoneModels>(query, id);
-
-            if (PhoneModels == null)
+            var model = new WorkPlatformAccountModels()
             {
-                return HttpNotFound();
-            }
-            return View(data.ToList());
+                Account = db.WorkPlatformModels.Find(id),
+
+                Phones = (db.Database.SqlQuery<PhoneModels>(query_phones, id)),
+
+                Address = db.AddressModels.SqlQuery(query_address, id).SingleOrDefault(),
+
+                Invoices = (db.Database.SqlQuery<InvoiceModels>(query_invoices, id)),
+
+                Notes = (db.Database.SqlQuery<NotesModels>(query_notes, id))
+            };
+      
+            return View(model);
         }
     }
 }

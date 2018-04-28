@@ -1,80 +1,55 @@
-﻿@{
-    ViewBag.Title = "Audit";
-    var history = new string[]
-{
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST"
-};
-
-    var invoices = new string[]
-    {
-"TEST",
-    };
-
-    var test = new int();
-    test = 500;
-    var phoneNumbers = new string[]
-    {
-"0768251685",
-"0351429800"
-    };
-}
+﻿@model CallCenter.Models.WorkPlatformAccountModels
 
 <div class="container body-content">
 
-<form class="form-inline" action="/action_page.php">
-    <div class="form-group">
-        <input type="text" class="form-control" id="act" placeholder="Account Number" name="act">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="sts" placeholder="Client Reference" name="sts">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="dsk" placeholder="Client ID" name="dsk">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="rdate" placeholder="Desk" name="rdate">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="rdate" placeholder="Status" name="rdate">
-    </div>
-    <button type="submit" class="btn">Search</button>
-</form>
+    <form class="form-inline" action="/action_page.php">
+        <div class="form-group">
+            <input type="text" class="form-control" id="act" placeholder="Account Number" name="act">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="sts" placeholder="Client Reference" name="sts">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="dsk" placeholder="Client ID" name="dsk">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="rdate" placeholder="Desk" name="rdate">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="rdate" placeholder="Status" name="rdate">
+        </div>
+        <button type="submit" class="btn">Search</button>
+    </form>
 
-<div id="accounts" style="overflow-y: scroll; overflow-x: hidden; height: 200px;">
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
-            <th>Account Number</th>
-            <th>Client Reference</th>
-            <th>Client ID</th>
-            <th>Name</th>
-            <th>Desk</th>
-            <th>Status</th>
-            <th>Assign Date</th>
-            <th>Assign amount</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="filterable-cell">Test</td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-                <td class="filterable-cell"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-    <hr/>
+    <div id="accounts" style="overflow-y: scroll; overflow-x: hidden; height: 200px;">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Client Reference</th>
+                    <th>Client ID</th>
+                    <th>Name</th>
+                    <th>Desk</th>
+                    <th>Status</th>
+                    <th>Assign Date</th>
+                    <th>Assign amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="filterable-cell">Test</td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                    <td class="filterable-cell"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-5 text-left">
@@ -82,12 +57,12 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td><b>Account Number:</b> @test</td>
-                            <td><b>Client Reference:</b> @test</td>
+                            <td><b>Account Number:</b> @Html.DisplayFor(model => model.Account.Id)</td>
+                            <td><b>Client Reference:</b> @Html.DisplayFor(model => model.Account.ClientReference)</td>
                         </tr>
                         <tr>
-                            <td><b>Name:</b> Test Testing</td>
-                            <td><b>Client ID:</b> @test</td>
+                            <td><b>Name:</b> @Html.DisplayFor(model => model.Account.Name)</td>
+                            <td><b>Client ID:</b> @Html.DisplayFor(model => model.Account.ClientID)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,27 +75,27 @@
                     <tbody>
                         <tr>
                             <td><b>Desk:</b></td>
-                            <td>SOP</td>
+                            <td>@Html.DisplayFor(model => model.Account.Desk)</td>
                             <td><b>Assign amount:</b></td>
-                            <td>500</td>
+                            <td>@Html.DisplayFor(model => model.Account.AssignAmount)</td>
                         </tr>
                         <tr>
                             <td><b>Status:</b></td>
-                            <td>CLOSED</td>
+                            <td>@Html.DisplayFor(model => model.Account.Status)</td>
                             <td><b>Total Received:</b></td>
-                            <td>300</td>
+                            <td>@Html.DisplayFor(model => model.Account.TotalReceived)</td>
                         </tr>
                         <tr>
                             <td><b>Assign Date:</b></td>
-                            <td>2018-01-01</td>
+                            <td>@Html.DisplayFor(model => model.Account.PalacementDate)</td>
                             <td><b>Other Due:</b></td>
-                            <td>0</td>
+                            <td>@Html.DisplayFor(model => model.Account.OtherDue)</td>
                         </tr>
                         <tr>
                             <td><b>Last Worked Date:</b></td>
-                            <td>2018-01-01</td>
+                            <td>@Html.DisplayFor(model => model.Account.LastWorkDate)</td>
                             <td><b>Total Due:</b></td>
-                            <td>200</td>
+                            <td>@Html.DisplayFor(model => model.Account.TotalDue)</td>
                         </tr>
                     </tbody>
                 </table>
@@ -131,39 +106,33 @@
                                 <th>Prefix</th>
                                 <th>Phone Number</th>
                                 <th>Extension</th>
+                                <th>Click to dial</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var line in phoneNumbers)
-                {
-                    <tr>
-                        <td class="filterable-cell">+44</td>
-                        <td class="filterable-cell">@line</td>
-                        <td class="filterable-cell"> </td>
-                    </tr>
-    }
+                            @foreach (var item in Model.Phones)
+                            {
+                                <tr>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Prefix)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Extension) </td>
+                                    <td class="filterable-cell"><button type="button" class="btn btn-primary" onclick="myFunction()">Call</button></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
-                </div>
-                <div align="center">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo3">Notes Report</button>
-                    <div id="demo3" class="collapse">
-                        Report showing notes history for a specific account.
-                        <br>
-                        <button type="button" class="btn btn-primary">Create Report</button>
-                    </div>
                 </div>
             </div>
             <div class="col-sm-7 sidenav">
                 <div class="container">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#acctDetails">Account Details</a></li>
+                        <li><a data-toggle="tab" href="#acctDetails">Account Details</a></li>
                         <li><a data-toggle="tab" href="#history">History</a></li>
                         <li><a data-toggle="tab" href="#invoices">Invoices</a></li>
                     </ul>
 
                     <div class="tab-content">
-                        <div id="history" class="tab-pane fade" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
+                        <div id="history" class="tab-pane fade in" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -176,21 +145,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var line in history)
+                                    @foreach (var item in Model.Notes)
                                     {
                                         <tr>
-                                            <td class="filterable-cell" style="word-break: keep-all;">2018/01/01 11:30</td>
-                                            <td class="filterable-cell">@line</td>
-                                            <td class="filterable-cell">@line</td>
-                                            <td class="filterable-cell">@line</td>
-                                            <td class="filterable-cell">@line</td>
-                                            <td class="filterable-cell">This guy never answers the phone, he does not want to give us the money back. I will lose my job.</td>
+                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.NoteDate)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.User)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Action)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Desk)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Note)</td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
-                        <div id="invoices" class="tab-pane fade" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
+                        <div id="invoices" class="tab-pane fade in" style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
@@ -203,15 +172,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var line in invoices)
+                                    @foreach (var item in Model.Invoices)
                                     {
                                         <tr>
-                                            <td class="filterable-cell" style="word-break: keep-all;">2018/01/01</td>
-                                            <td class="filterable-cell">75898785</td>
-                                            <td class="filterable-cell">500</td>
-                                            <td class="filterable-cell">200</td>
-                                            <td class="filterable-cell">ACTIVE</td>
-                                            <td class="filterable-cell" style="word-break: keep-all;">2018/01/01</td>
+                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Invoice)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Amount)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Due)</td>
+                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -221,25 +190,24 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <td><b>Full Name:</b> Tester Testing Test</td>
+                                        <td><b>Full Name:</b> @Html.DisplayFor(model => model.Address.FullName)</td>
                                     </tr>
                                     <tr>
-                                        <td><b>Contact:</b> Mr.Test</td>
+                                        <td><b>Contact:</b> @Html.DisplayFor(model => model.Address.Contact)</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <b>Address:</b> 123 6th St.
-                                            Melbourne, FL 32904
+                                            <b>Address:</b> @Html.DisplayFor(model => model.Address.Address)
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><b>Email:</b> test@test.com</td>
+                                        <td><b>Email:</b> @Html.DisplayFor(model => model.Address.Email)</td>
                                     </tr>
                                     <tr>
-                                        <td><b>Country:</b> USA</td>
+                                        <td><b>Country:</b> @Html.DisplayFor(model => model.Address.Country)</td>
                                     </tr>
                                     <tr>
-                                        <td><b>Time zone:</b> USA/NY</td>
+                                        <td><b>Time zone:</b> @Html.DisplayFor(model => model.Address.TimeZone)</td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -258,4 +226,4 @@
             </div>
         </div>
     </div>
-</div>
+    </body>
