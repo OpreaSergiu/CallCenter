@@ -11,6 +11,7 @@ namespace CallCenter.Models
         [Key]
         public int Id { get; set; }
         public int AccountNumber { get; set; }
+        public int SeqNumber { get; set; }
         public string User { get; set; }
         public string Action { get; set; }
         public string Status { get; set; }

@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201804241614236_test1.Designer.cs">
       <DependentUpon>201804241614236_test1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804301920329_AddUr.cs" />
+    <Compile Include="Migrations\201804301920329_AddUr.Designer.cs">
+      <DependentUpon>201804301920329_AddUr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -374,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804241614236_test1.resx">
       <DependentUpon>201804241614236_test1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804301920329_AddUr.resx">
+      <DependentUpon>201804301920329_AddUr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

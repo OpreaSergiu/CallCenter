@@ -20,7 +20,7 @@ namespace CallCenter.Controllers
         {
             return View();
         }
-        public ActionResult Audit(int? id)
+        public ActionResult Audit(int? id=0)
         {
 
             if (id == null)
@@ -31,7 +31,7 @@ namespace CallCenter.Controllers
             string query_phones = "SELECT * FROM PhoneModels WHERE AccountNumber = @p0 ";
             string query_address = "SELECT * FROM AddressModels WHERE AccountNumber = @p0 ";
             string query_invoices = "SELECT * FROM InvoiceModels WHERE AccountNumber = @p0 ";
-            string query_notes = "SELECT * FROM NotesModels WHERE AccountNumber = @p0 ";
+            string query_notes = "SELECT * FROM NotesModels WHERE AccountNumber = @p0 ORDER BY SeqNumber DESC";
 
             var model = new WorkPlatformAccountModels()
             {
