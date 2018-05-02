@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using CallCenter;
 using CallCenter.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace CallCenter.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class WorkPlatformController : Controller
     {
         private Context db = new Context();
@@ -40,7 +41,7 @@ namespace CallCenter.Controllers
 
                 Notes = (db.Database.SqlQuery<NotesModels>(query_notes, id))
             };
-      
+
             return View(model);
         }
     }

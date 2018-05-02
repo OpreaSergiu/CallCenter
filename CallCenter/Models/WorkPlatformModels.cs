@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -17,7 +18,9 @@ namespace CallCenter.Models
         public float TotalDue { get; set; }
         public string Desk { get; set; }
         public string Status { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime PalacementDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime LastWorkDate { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using CallCenter.Models;
 
 namespace CallCenter.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Client")]
     public class ClientPortalController : Controller
     {
         private Context db = new Context();

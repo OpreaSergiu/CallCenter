@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CallCenter.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class BackofficeController : Controller
     {
         public ActionResult Index()

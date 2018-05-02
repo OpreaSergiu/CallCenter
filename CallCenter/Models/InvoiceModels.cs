@@ -15,7 +15,9 @@ namespace CallCenter.Models
         public string Status { get; set; }
         public float Amount { get; set; }
         public float Due { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime InvoiceDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DueDate { get; set; }
     }
 }
