@@ -13,10 +13,10 @@ namespace CallCenter.Models
         public int AccountNumber { get; set; }
         public int SeqNumber { get; set; }
         public string User { get; set; }
-        public string Action { get; set; }
+        public string ActionCode { get; set; }
         public string Status { get; set; }
         public string Desk { get; set; }
         public string Note { get; set; }
-        public DateTime NoteDate { get; set; }
+        public DateTime? NoteDate { get; set; }
     }
 }

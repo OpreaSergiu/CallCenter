@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201805021424279_AddUrl1.Designer.cs">
       <DependentUpon>201805021424279_AddUrl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805062003066_AddUrl2.cs" />
+    <Compile Include="Migrations\201805062003066_AddUrl2.Designer.cs">
+      <DependentUpon>201805062003066_AddUrl2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805062147463_AddUrl3.cs" />
+    <Compile Include="Migrations\201805062147463_AddUrl3.Designer.cs">
+      <DependentUpon>201805062147463_AddUrl3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -395,6 +403,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805021424279_AddUrl1.resx">
       <DependentUpon>201805021424279_AddUrl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805062003066_AddUrl2.resx">
+      <DependentUpon>201805062003066_AddUrl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805062147463_AddUrl3.resx">
+      <DependentUpon>201805062147463_AddUrl3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
