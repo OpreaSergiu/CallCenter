@@ -10,6 +10,7 @@ using CallCenter;
 using CallCenter.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using Microsoft.AspNet.Identity;
 
 namespace CallCenter.Controllers
 {
@@ -42,8 +43,13 @@ namespace CallCenter.Controllers
 
                 Notes = (db.Database.SqlQuery<NotesModels>(query_notes, id)),
 
-                Notes2 = new NotesModels()
+                Check = true
             };
+
+            if(model.Account is null)
+            {
+                model.Check = false;
+            }
 
             return View(model);
         }
@@ -51,22 +57,39 @@ namespace CallCenter.Controllers
         public ActionResult Index(string actioncode, string status, string note, int? id = 0)
         {
             SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            SqlCommand insert = new SqlCommand("INSERT INTO NotesModels(AccountNumber, ActionCode, Status, Note) values(@p0, @p1, @p2, @p3)", conn);
+            SqlCommand insert = new SqlCommand("INSERT INTO NotesModels(AccountNumber, ActionCode, Status, Note, SeqNumber, NoteDate, UserCode, Desk) values(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)", conn);
             insert.Parameters.AddWithValue("@p0", id);
             insert.Parameters.AddWithValue("@p1", actioncode);
             insert.Parameters.AddWithValue("@p2", status);
             insert.Parameters.AddWithValue("@p3", note);
-            try
-            {
-                conn.Open();
-                insert.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                conn.Close();
-            }
 
-            return Redirect("/WorkPlatform/Index/1");
+            SqlCommand com = new SqlCommand("SELECT MAX(SeqNumber)+1 FROM NotesModels WHERE AccountNumber = @p0", conn);
+            com.Parameters.AddWithValue("@p0", id);
+
+            conn.Open();
+
+            string seq_number = com.ExecuteScalar().ToString();
+
+            insert.Parameters.AddWithValue("@p4", seq_number);
+
+            var currentDate = DateTime.Now.ToString();
+
+            insert.Parameters.AddWithValue("@p5", currentDate);
+
+            string user_name = User.Identity.GetUserName();
+
+            SqlCommand com2 = new SqlCommand("SELECT Desk FROM UserDeskModels WHERE UserEmail = @p0", conn);
+            com2.Parameters.AddWithValue("@p0", user_name);
+
+            string user_desk = com2.ExecuteScalar().ToString();
+
+            insert.Parameters.AddWithValue("@p6", user_desk);
+            insert.Parameters.AddWithValue("@p7", user_desk);
+
+            insert.ExecuteNonQuery();
+
+            string redirectUrl = "/WorkPlatform/Index/" + id;
+            return Redirect(redirectUrl);
         }
     }
 }

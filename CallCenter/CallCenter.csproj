@@ -239,6 +239,38 @@
     <Compile Include="Migrations\201805062147463_AddUrl3.Designer.cs">
       <DependentUpon>201805062147463_AddUrl3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805071358153_AddUrl4.cs" />
+    <Compile Include="Migrations\201805071358153_AddUrl4.Designer.cs">
+      <DependentUpon>201805071358153_AddUrl4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071359202_AddUrl5.cs" />
+    <Compile Include="Migrations\201805071359202_AddUrl5.Designer.cs">
+      <DependentUpon>201805071359202_AddUrl5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071402084_AddUrl6.cs" />
+    <Compile Include="Migrations\201805071402084_AddUrl6.Designer.cs">
+      <DependentUpon>201805071402084_AddUrl6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071403490_AddUrl7.cs" />
+    <Compile Include="Migrations\201805071403490_AddUrl7.Designer.cs">
+      <DependentUpon>201805071403490_AddUrl7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071412405_AddUrl8.cs" />
+    <Compile Include="Migrations\201805071412405_AddUrl8.Designer.cs">
+      <DependentUpon>201805071412405_AddUrl8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071700201_AddUrl9.cs" />
+    <Compile Include="Migrations\201805071700201_AddUrl9.Designer.cs">
+      <DependentUpon>201805071700201_AddUrl9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071721190_AddUrl10.cs" />
+    <Compile Include="Migrations\201805071721190_AddUrl10.Designer.cs">
+      <DependentUpon>201805071721190_AddUrl10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071723195_AddUrl11.cs" />
+    <Compile Include="Migrations\201805071723195_AddUrl11.Designer.cs">
+      <DependentUpon>201805071723195_AddUrl11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -247,7 +279,9 @@
     <Compile Include="Models\InvoiceModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NotesModels.cs" />
+    <Compile Include="Models\PaymentsModels.cs" />
     <Compile Include="Models\PhoneModels.cs" />
+    <Compile Include="Models\UserDeskModels.cs" />
     <Compile Include="Models\WorkPlatformAccountModels.cs" />
     <Compile Include="Models\WorkPlatformModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -409,6 +443,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805062147463_AddUrl3.resx">
       <DependentUpon>201805062147463_AddUrl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071358153_AddUrl4.resx">
+      <DependentUpon>201805071358153_AddUrl4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071359202_AddUrl5.resx">
+      <DependentUpon>201805071359202_AddUrl5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071402084_AddUrl6.resx">
+      <DependentUpon>201805071402084_AddUrl6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071403490_AddUrl7.resx">
+      <DependentUpon>201805071403490_AddUrl7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071412405_AddUrl8.resx">
+      <DependentUpon>201805071412405_AddUrl8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071700201_AddUrl9.resx">
+      <DependentUpon>201805071700201_AddUrl9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071721190_AddUrl10.resx">
+      <DependentUpon>201805071721190_AddUrl10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071723195_AddUrl11.resx">
+      <DependentUpon>201805071723195_AddUrl11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

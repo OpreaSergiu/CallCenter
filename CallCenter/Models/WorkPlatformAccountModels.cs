@@ -12,6 +12,6 @@ namespace CallCenter.Models
         public IEnumerable<InvoiceModels> Invoices { get; set; }
         public AddressModels Address { get; set; }
         public WorkPlatformModels Account { get; set; }
-        public NotesModels Notes2 { get; set; }
+        public bool Check { get; set; }
     }
 }
