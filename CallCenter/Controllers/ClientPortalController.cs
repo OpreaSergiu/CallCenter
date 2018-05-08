@@ -54,7 +54,7 @@ namespace CallCenter.Controllers
         }
         public ActionResult Payments()
         {
-            return View();
+            return View(db.PaymentsModels.ToList());
         }
     }
 }

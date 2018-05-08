@@ -9,6 +9,8 @@ namespace CallCenter.Controllers
     [Authorize(Roles = "Admin")]
     public class BackofficeController : Controller
     {
+        private Context db = new Context();
+
         public ActionResult Index()
         {
             return View();
@@ -21,9 +23,10 @@ namespace CallCenter.Controllers
         {
             return View();
         }
+
         public ActionResult PaymentRequest()
         {
-            return View();
+            return View(db.PaymentsModels.ToList());
         }
     }
 }

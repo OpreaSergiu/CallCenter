@@ -1,47 +1,65 @@
-﻿
-@{
-    ViewBag.Title = "PaymentRequest";
-    var payments = new string[]
-    {
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST",
-"TEST"
-    };
-}
-
+﻿@model IEnumerable<CallCenter.Models.PaymentsModels>
 
 <hr />
 
 <div style="overflow-y: scroll; overflow-x: hidden; height: 400px;">
     <table class="table table-striped table-bordered">
-        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientReference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDate)
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Date</th>
-                <th>Account Number</th>
-                <th>Client ID</th>
-                <th>Client Reference</th>
-                <th>Invoice</th>
-                <th>Amount</th>
-                <th>Action</th>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.ClientID)
+                </td>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.ClientReference)
+                </td>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.Invoice)
+                </td>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td class="filterable-cell">
+                    @Html.DisplayFor(modelItem => item.PaymentDate)
+                </td>
+                <td>
+                    @if (item.Approve)
+                    {
+                        <a>Approved!</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Approve", "ApprovePayment", new { id = item.Id })
+                    }
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in payments)
-            {
-                <tr>
-                    <td class="filterable-cell" style="word-break: keep-all;">2018/01/01 11:30</td>
-                    <td class="filterable-cell">100</td>
-                    <td class="filterable-cell">TEST</td>
-                    <td class="filterable-cell">5943H</td>
-                    <td class="filterable-cell">8056672</td>
-                    <td class="filterable-cell">500</td>
-                    <td class="filterable-cell"><button type="button" class="btn">Aprove</button></td>
-                </tr>
-            }
-        </tbody>
+        }
     </table>
 </div>

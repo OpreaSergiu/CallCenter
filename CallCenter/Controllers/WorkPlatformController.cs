@@ -88,6 +88,13 @@ namespace CallCenter.Controllers
 
             insert.ExecuteNonQuery();
 
+            SqlCommand com3 = new SqlCommand("UPDATE WorkPlatformModels SET LastWorkDate = @p0, Desk = @p1  WHERE Id = @p2", conn);
+            com3.Parameters.AddWithValue("@p0", currentDate);
+            com3.Parameters.AddWithValue("@p1", user_desk);
+            com3.Parameters.AddWithValue("@p2", id);
+
+            com3.ExecuteNonQuery();
+
             string redirectUrl = "/WorkPlatform/Index/" + id;
             return Redirect(redirectUrl);
         }

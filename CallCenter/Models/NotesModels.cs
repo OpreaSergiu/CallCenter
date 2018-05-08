@@ -17,7 +17,7 @@ namespace CallCenter.Models
         public string Status { get; set; }
         public string Desk { get; set; }
         public string Note { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}")]
         public DateTime? NoteDate { get; set; }
     }
 }
