@@ -18,5 +18,6 @@ namespace CallCenter.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? PaymentDate { get; set; }
         public bool Approve { get; set; }
+        public bool PostedFlag { get; set; }
     }
 }

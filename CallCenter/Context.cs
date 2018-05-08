@@ -16,5 +16,6 @@ namespace CallCenter
         public DbSet<AddressModels> AddressModels { get; set; }
         public DbSet<UserDeskModels> UserDeskModels { get; set; }
         public DbSet<PaymentsModels> PaymentsModels { get; set; }
+        public DbSet<LoginLogsModels> LoginLogsModels { get; set; }
     }
 }

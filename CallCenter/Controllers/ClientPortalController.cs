@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -55,6 +56,19 @@ namespace CallCenter.Controllers
         public ActionResult Payments()
         {
             return View(db.PaymentsModels.ToList());
+        }
+        public ActionResult ApprovePayment(int id)
+        {
+            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            SqlCommand com = new SqlCommand("UPDATE PaymentsModels SET Approve = 1 WHERE Id = @p0", conn);
+            com.Parameters.AddWithValue("@p0", id);
+
+            conn.Open();
+
+            com.ExecuteNonQuery();
+
+            return RedirectToAction("Payments");
         }
     }
 }

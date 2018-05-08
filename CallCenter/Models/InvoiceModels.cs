@@ -19,5 +19,7 @@ namespace CallCenter.Models
         public DateTime InvoiceDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DueDate { get; set; }
+        public bool PaymentRequestFlag { get; set; }
+        public bool PostedFlag { get; set; }
     }
 }

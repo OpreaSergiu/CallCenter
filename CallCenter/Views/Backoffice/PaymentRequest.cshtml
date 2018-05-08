@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.PaymentDate)
             </th>
             <th>
-                Action
+                Action/Status
             </th>
         </tr>
 
@@ -52,11 +52,18 @@
             <td>
                 @if (item.Approve)
                 {
-                    @Html.ActionLink("Post", "Post", new { id = item.Id })
+                    if (item.PostedFlag)
+                    {
+                        <a>Already Posted!</a>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Post", "PaymentPost", new { id = item.Id })
+                    }
                 }
                 else
                 {
-                    <a>Post</a>
+                    <a>Awaiting Approval!</a>
                 }
             </td>
         </tr>

@@ -88,14 +88,53 @@ namespace CallCenter.Controllers
 
             insert.ExecuteNonQuery();
 
-            SqlCommand com3 = new SqlCommand("UPDATE WorkPlatformModels SET LastWorkDate = @p0, Desk = @p1  WHERE Id = @p2", conn);
+            SqlCommand com3 = new SqlCommand("UPDATE WorkPlatformModels SET LastWorkDate = @p0, Desk = @p1, Status = @p2  WHERE Id = @p3", conn);
             com3.Parameters.AddWithValue("@p0", currentDate);
             com3.Parameters.AddWithValue("@p1", user_desk);
-            com3.Parameters.AddWithValue("@p2", id);
+            com3.Parameters.AddWithValue("@p2", status);
+            com3.Parameters.AddWithValue("@p3", id);
 
             com3.ExecuteNonQuery();
 
             string redirectUrl = "/WorkPlatform/Index/" + id;
+            return Redirect(redirectUrl);
+        }
+
+        public ActionResult ProcessPaymentRequest(int id)
+        {
+            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            SqlCommand com = new SqlCommand("UPDATE InvoiceModels SET PaymentRequestFlag = 1 WHERE Id = @p0", conn);
+            com.Parameters.AddWithValue("@p0", id);
+
+            conn.Open();
+
+            com.ExecuteNonQuery();
+
+            SqlCommand insert = new SqlCommand("INSERT INTO PaymentsModels(AccountNumber, ClientID, ClientReference, Invoice, Amount, PaymentDate, Approve, PostedFlag) values(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)", conn);
+
+            bool flag = false;
+            var currentDate = DateTime.Now.ToString();
+
+            var InvModel = new InvoiceModels();
+            var AccModel = new WorkPlatformModels();
+
+            InvModel = db.InvoiceModels.Find(id);
+            AccModel = db.WorkPlatformModels.Find(InvModel.AccountNumber);
+
+            insert.Parameters.AddWithValue("@p0", AccModel.Id);
+            insert.Parameters.AddWithValue("@p1", AccModel.ClientID);
+            insert.Parameters.AddWithValue("@p2", AccModel.ClientReference);
+            insert.Parameters.AddWithValue("@p3", InvModel.Invoice);
+            insert.Parameters.AddWithValue("@p4", InvModel.Amount);
+            insert.Parameters.AddWithValue("@p5", currentDate);
+            insert.Parameters.AddWithValue("@p6", flag);
+            insert.Parameters.AddWithValue("@p7", flag);
+
+            insert.ExecuteNonQuery();
+
+            string redirectUrl = "/WorkPlatform/Index/" + AccModel.Id;
+
             return Redirect(redirectUrl);
         }
     }

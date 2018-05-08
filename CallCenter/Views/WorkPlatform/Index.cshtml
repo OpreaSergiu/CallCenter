@@ -1,4 +1,26 @@
 ﻿@model CallCenter.Models.WorkPlatformAccountModels
+
+<hr />
+
+<form class="form-inline" action="">
+    <div class="form-group">
+        <input type="text" class="form-control" id="act" placeholder="Account Number" name="act">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="sts" placeholder="Client Reference" name="sts">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="dsk" placeholder="Client ID" name="dsk">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="rdate" placeholder="Desk" name="rdate">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="rdate" placeholder="Status" name="rdate">
+    </div>
+    <button type="submit" class="btn">Search</button>
+</form>
+
 <hr />
 
 <div class="container-fluid text-center">
@@ -120,19 +142,37 @@
                                     <th>Due</th>
                                     <th>Status</th>
                                     <th>Due Date</th>
+                                    <th>Payment Request</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.Invoices)
                                 {
-                                    <tr>
-                                        <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
-                                        <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Invoice)</td>
-                                        <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Amount)</td>
-                                        <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Due)</td>
-                                        <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
-                                    </tr>
+                                <tr>
+                                    <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Invoice)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Amount)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Due)</td>
+                                    <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
+                                    <td>
+                                        @if(item.PaymentRequestFlag)
+                                        {
+                                            if(item.PostedFlag)
+                                            {
+                                                <p>Posted</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Awaiting Approval!</p>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Submit Payment Request", "ProcessPaymentRequest", new { id = item.Id })
+                                        }
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -197,6 +237,7 @@ else
                         <option>EML</option>
                         <option>PMR</option>
                         <option>PTP</option>
+                        <option>PRQ</option>
                     </select>
                     <select class="form-control" id="status" name="status">
                         <option>OPEN</option>

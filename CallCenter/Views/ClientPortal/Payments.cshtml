@@ -24,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.PaymentDate)
             </th>
             <th>
-                Action
+                Action/Status
             </th>
         </tr>
 
@@ -52,7 +52,14 @@
                 <td>
                     @if (item.Approve)
                     {
-                        <a>Approved!</a>
+                        if(item.PostedFlag)
+                        {
+                            <p>Approved and Posted!</p>
+                        }
+                        else
+                        {
+                            <p>Approved!</p>
+                        }
                     }
                     else
                     {

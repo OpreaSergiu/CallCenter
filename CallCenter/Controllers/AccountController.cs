@@ -9,12 +9,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CallCenter.Models;
+using System.Data.SqlClient;
 
 namespace CallCenter.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private Context db = new Context();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -77,11 +79,29 @@ namespace CallCenter.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             var user = await UserManager.FindAsync(model.Email, model.Password);
+            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlCommand insert = new SqlCommand("INSERT INTO LoginLogsModels(UserEmail, UserRole, LoginDate) values(@p0, @p1, @p2)", conn);
+            insert.Parameters.AddWithValue("@p0", model.Email);
+            if (UserManager.IsInRole(user.Id, "Admin"))
+                insert.Parameters.AddWithValue("@p1", "Admin");
+            else if (UserManager.IsInRole(user.Id, "Client"))
+                insert.Parameters.AddWithValue("@p1", "Client");
+            else if (UserManager.IsInRole(user.Id, "User"))
+                insert.Parameters.AddWithValue("@p1", "User");
+            else
+                insert.Parameters.AddWithValue("@p1", " ");
+            var currentDate = DateTime.Now.ToString();
+            insert.Parameters.AddWithValue("@p2", currentDate);
+
+            conn.Open();
+            insert.ExecuteNonQuery();
+
             switch (result)
             {
                 case SignInStatus.Success:
                     if (UserManager.IsInRole(user.Id, "User"))
                         return RedirectToLocal("/WorkPlatform/Index/");
+
                     else if (UserManager.IsInRole(user.Id, "Client"))
                         return RedirectToLocal("/ClientPortal/Index/");
                     else if (UserManager.IsInRole(user.Id, "Admin"))
