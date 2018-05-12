@@ -3,26 +3,46 @@
 <div class="container body-content">
     <hr />
 
-    <form class="form-inline" action="">
-        <div class="form-group">
-            <input type="text" class="form-control" id="act" placeholder="Account Number" name="act">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="sts" placeholder="Client Reference" name="sts">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="dsk" placeholder="Client ID" name="dsk">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="rdate" placeholder="Desk" name="rdate">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="rdate" placeholder="Status" name="rdate">
-        </div>
-        <button type="submit" class="btn">Search</button>
-    </form>
+    @if (Model.Inventory.Count() == 0)
+    {
 
-    <hr />
+    }
+    else
+    {
+        <div id="accounts" style="overflow-y: scroll; overflow-x: hidden; height: 200px;">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Account Number</th>
+                        <th>Client Reference</th>
+                        <th>Client ID</th>
+                        <th>Name</th>
+                        <th>Desk</th>
+                        <th>Status</th>
+                        <th>Assign Date</th>
+                        <th>Assign amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Inventory)
+                    {
+                        <tr>
+                            <td class="filterable-cell"><a href=" @Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Id)</a></td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ClientReference)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ClientID)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Desk)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.PalacementDate)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.AssignAmount)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr />
+    }
+
     <div class="container-fluid text-center">
         <div class="row content">
             <div class="col-sm-5 text-left">

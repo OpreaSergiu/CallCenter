@@ -13,5 +13,6 @@ namespace CallCenter.Models
         public AddressModels Address { get; set; }
         public WorkPlatformModels Account { get; set; }
         public bool Check { get; set; }
+        public IEnumerable<WorkPlatformModels> Inventory { get; set; }
     }
 }

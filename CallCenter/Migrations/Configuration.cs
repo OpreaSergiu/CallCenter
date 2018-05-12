@@ -5,15 +5,15 @@ namespace CallCenter.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CallCenter.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<CallCenter.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "CallCenter.Context";
+            ContextKey = "CallCenter.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(CallCenter.Context context)
+        protected override void Seed(CallCenter.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -17,7 +17,7 @@ namespace CallCenter.Controllers
     [Authorize(Roles = "User")]
     public class WorkPlatformController : Controller
     {
-        private Context db = new Context();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index(int? id = 0)
         {
@@ -26,24 +26,21 @@ namespace CallCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            string query_phones = "SELECT * FROM PhoneModels WHERE AccountNumber = @p0 ";
-            string query_address = "SELECT * FROM AddressModels WHERE AccountNumber = @p0 ";
-            string query_invoices = "SELECT * FROM InvoiceModels WHERE AccountNumber = @p0 ";
-            string query_notes = "SELECT * FROM NotesModels WHERE AccountNumber = @p0 ORDER BY SeqNumber DESC";
-
             var model = new WorkPlatformAccountModels()
             {
                 Account = db.WorkPlatformModels.Find(id),
 
-                Phones = (db.Database.SqlQuery<PhoneModels>(query_phones, id)),
+                Phones = db.PhoneModels.Where(m => m.AccountNumber == id),
 
-                Address = db.AddressModels.SqlQuery(query_address, id).SingleOrDefault(),
+                Address = db.AddressModels.Where(m => m.AccountNumber == id).SingleOrDefault(),
 
-                Invoices = (db.Database.SqlQuery<InvoiceModels>(query_invoices, id)),
+                Invoices = db.InvoiceModels.Where(m => m.AccountNumber == id),
 
-                Notes = (db.Database.SqlQuery<NotesModels>(query_notes, id)),
+                Notes = db.NotesModels.Where(m => m.AccountNumber == id).OrderByDescending(s => s.SeqNumber),
 
-                Check = true
+                Check = true,
+
+                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == "TEST01")
             };
 
             if(model.Account is null)
@@ -54,47 +51,37 @@ namespace CallCenter.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Index(string actioncode, string status, string note, int? id = 0)
+        public ActionResult Index(string actioncode, string status, string note, int id)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            SqlCommand insert = new SqlCommand("INSERT INTO NotesModels(AccountNumber, ActionCode, Status, Note, SeqNumber, NoteDate, UserCode, Desk) values(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)", conn);
-            insert.Parameters.AddWithValue("@p0", id);
-            insert.Parameters.AddWithValue("@p1", actioncode);
-            insert.Parameters.AddWithValue("@p2", status);
-            insert.Parameters.AddWithValue("@p3", note);
-
-            SqlCommand com = new SqlCommand("SELECT MAX(SeqNumber)+1 FROM NotesModels WHERE AccountNumber = @p0", conn);
-            com.Parameters.AddWithValue("@p0", id);
-
-            conn.Open();
-
-            string seq_number = com.ExecuteScalar().ToString();
-
-            insert.Parameters.AddWithValue("@p4", seq_number);
-
-            var currentDate = DateTime.Now.ToString();
-
-            insert.Parameters.AddWithValue("@p5", currentDate);
-
             string user_name = User.Identity.GetUserName();
+            var currentDate = DateTime.Now;
 
-            SqlCommand com2 = new SqlCommand("SELECT Desk FROM UserDeskModels WHERE UserEmail = @p0", conn);
-            com2.Parameters.AddWithValue("@p0", user_name);
+            int maxAge = db.NotesModels.Where(m => m.AccountNumber == id).Max(p => p.SeqNumber);
 
-            string user_desk = com2.ExecuteScalar().ToString();
+            var user_desk = db.UserDeskModels.SingleOrDefault(b => b.UserEmail == user_name);
 
-            insert.Parameters.AddWithValue("@p6", user_desk);
-            insert.Parameters.AddWithValue("@p7", user_desk);
+            var result = db.WorkPlatformModels.SingleOrDefault(b => b.Id == id);
+            if (result != null)
+            {
+                result.LastWorkDate = currentDate;
+                result.Desk = user_desk.Desk;
+                result.Status = status;
+                db.SaveChanges();
+            }
 
-            insert.ExecuteNonQuery();
+            var newNote = new NotesModels();
 
-            SqlCommand com3 = new SqlCommand("UPDATE WorkPlatformModels SET LastWorkDate = @p0, Desk = @p1, Status = @p2  WHERE Id = @p3", conn);
-            com3.Parameters.AddWithValue("@p0", currentDate);
-            com3.Parameters.AddWithValue("@p1", user_desk);
-            com3.Parameters.AddWithValue("@p2", status);
-            com3.Parameters.AddWithValue("@p3", id);
+            newNote.AccountNumber = id;
+            newNote.ActionCode = actioncode;
+            newNote.Status = status;
+            newNote.Note = note;
+            newNote.SeqNumber = maxAge + 1;
+            newNote.NoteDate = currentDate;
+            newNote.UserCode = user_desk.Desk;
+            newNote.Desk = user_desk.Desk;
 
-            com3.ExecuteNonQuery();
+            db.NotesModels.Add(newNote);
+            db.SaveChanges();
 
             string redirectUrl = "/WorkPlatform/Index/" + id;
             return Redirect(redirectUrl);
@@ -102,36 +89,29 @@ namespace CallCenter.Controllers
 
         public ActionResult ProcessPaymentRequest(int id)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            var result = db.InvoiceModels.SingleOrDefault(b => b.Id == id);
+            if (result != null)
+            {
+                result.PaymentRequestFlag = true;
+                db.SaveChanges();
+            }
 
-            SqlCommand com = new SqlCommand("UPDATE InvoiceModels SET PaymentRequestFlag = 1 WHERE Id = @p0", conn);
-            com.Parameters.AddWithValue("@p0", id);
+            var newPayment = new PaymentsModels();
+            var InvModel = db.InvoiceModels.Find(id);
+            var AccModel = db.WorkPlatformModels.Find(InvModel.AccountNumber);
+            var currentDate = DateTime.Now;
 
-            conn.Open();
+            newPayment.AccountNumber = AccModel.Id;
+            newPayment.ClientID = AccModel.ClientID;
+            newPayment.ClientReference = AccModel.ClientReference;
+            newPayment.Invoice = InvModel.Invoice;
+            newPayment.Amount = InvModel.Amount;
+            newPayment.PaymentDate = currentDate;
+            newPayment.Approve = false;
+            newPayment.PostedFlag = false;
 
-            com.ExecuteNonQuery();
-
-            SqlCommand insert = new SqlCommand("INSERT INTO PaymentsModels(AccountNumber, ClientID, ClientReference, Invoice, Amount, PaymentDate, Approve, PostedFlag) values(@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)", conn);
-
-            bool flag = false;
-            var currentDate = DateTime.Now.ToString();
-
-            var InvModel = new InvoiceModels();
-            var AccModel = new WorkPlatformModels();
-
-            InvModel = db.InvoiceModels.Find(id);
-            AccModel = db.WorkPlatformModels.Find(InvModel.AccountNumber);
-
-            insert.Parameters.AddWithValue("@p0", AccModel.Id);
-            insert.Parameters.AddWithValue("@p1", AccModel.ClientID);
-            insert.Parameters.AddWithValue("@p2", AccModel.ClientReference);
-            insert.Parameters.AddWithValue("@p3", InvModel.Invoice);
-            insert.Parameters.AddWithValue("@p4", InvModel.Amount);
-            insert.Parameters.AddWithValue("@p5", currentDate);
-            insert.Parameters.AddWithValue("@p6", flag);
-            insert.Parameters.AddWithValue("@p7", flag);
-
-            insert.ExecuteNonQuery();
+            db.PaymentsModels.Add(newPayment);
+            db.SaveChanges();
 
             string redirectUrl = "/WorkPlatform/Index/" + AccModel.Id;
 

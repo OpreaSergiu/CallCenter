@@ -15,7 +15,7 @@ namespace CallCenter.Controllers
     [Authorize(Roles = "Client")]
     public class ClientPortalController : Controller
     {
-        private Context db = new Context();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {
@@ -29,26 +29,31 @@ namespace CallCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            string query_phones = "SELECT * FROM PhoneModels WHERE AccountNumber = @p0 ";
-            string query_address = "SELECT * FROM AddressModels WHERE AccountNumber = @p0 ";
-            string query_invoices = "SELECT * FROM InvoiceModels WHERE AccountNumber = @p0 ";
-            string query_notes = "SELECT * FROM NotesModels WHERE AccountNumber = @p0 ORDER BY SeqNumber DESC";
-
             var model = new WorkPlatformAccountModels()
             {
                 Account = db.WorkPlatformModels.Find(id),
 
-                Phones = (db.Database.SqlQuery<PhoneModels>(query_phones, id)),
+                Phones = db.PhoneModels.Where(m => m.AccountNumber == id),
 
-                Address = db.AddressModels.SqlQuery(query_address, id).SingleOrDefault(),
+                Address = db.AddressModels.Where(m => m.AccountNumber == id).SingleOrDefault(),
 
-                Invoices = (db.Database.SqlQuery<InvoiceModels>(query_invoices, id)),
+                Invoices = db.InvoiceModels.Where(m => m.AccountNumber == id),
 
-                Notes = (db.Database.SqlQuery<NotesModels>(query_notes, id))
+                Notes = db.NotesModels.Where(m => m.AccountNumber == id).OrderByDescending(s => s.SeqNumber),
+
+                Check = true,
+
+                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == "TEST01")
             };
+
+            if (model.Account is null)
+            {
+                model.Check = false;
+            }
 
             return View(model);
         }
+
         public ActionResult Reports()
         {
             return View();
@@ -59,14 +64,12 @@ namespace CallCenter.Controllers
         }
         public ActionResult ApprovePayment(int id)
         {
-            SqlConnection conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CallCenter.Context;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-            SqlCommand com = new SqlCommand("UPDATE PaymentsModels SET Approve = 1 WHERE Id = @p0", conn);
-            com.Parameters.AddWithValue("@p0", id);
-
-            conn.Open();
-
-            com.ExecuteNonQuery();
+            var result = db.PaymentsModels.SingleOrDefault(b => b.Id == id);
+            if (result != null)
+            {
+                result.Approve = true;
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Payments");
         }

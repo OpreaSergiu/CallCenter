@@ -14,7 +14,7 @@ namespace CallCenter.Models
         public string ClientID { get; set; }
         public string ClientReference { get; set; }
         public string Invoice { get; set; }
-        public string Amount { get; set; }
+        public float Amount { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? PaymentDate { get; set; }
         public bool Approve { get; set; }
