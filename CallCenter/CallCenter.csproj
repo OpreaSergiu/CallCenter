@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201805121240043_AddUrl1.Designer.cs">
       <DependentUpon>201805121240043_AddUrl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805121928203_AddUrl2.cs" />
+    <Compile Include="Migrations\201805121928203_AddUrl2.Designer.cs">
+      <DependentUpon>201805121928203_AddUrl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModels.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="Models\NotesModels.cs" />
     <Compile Include="Models\PaymentsModels.cs" />
     <Compile Include="Models\PhoneModels.cs" />
+    <Compile Include="Models\UserClientIdModels.cs" />
     <Compile Include="Models\UserDeskModels.cs" />
     <Compile Include="Models\WorkPlatformAccountModels.cs" />
     <Compile Include="Models\WorkPlatformModels.cs" />
@@ -351,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ReportingScripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -373,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805121240043_AddUrl1.resx">
       <DependentUpon>201805121240043_AddUrl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805121928203_AddUrl2.resx">
+      <DependentUpon>201805121928203_AddUrl2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

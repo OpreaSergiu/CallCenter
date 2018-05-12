@@ -38,5 +38,6 @@ namespace CallCenter.Models
         public DbSet<UserDeskModels> UserDeskModels { get; set; }
         public DbSet<PaymentsModels> PaymentsModels { get; set; }
         public DbSet<LoginLogsModels> LoginLogsModels { get; set; }
+        public DbSet<UserClientIdModels> UserClientIdModels { get; set; }
     }
 }

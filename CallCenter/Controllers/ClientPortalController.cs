@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using CallCenter;
 using CallCenter.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CallCenter.Controllers
 {
@@ -29,6 +30,22 @@ namespace CallCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            string user_name = User.Identity.GetUserName();
+            var user_client = db.UserClientIdModels.SingleOrDefault(b => b.UserEmail == user_name);
+
+            var emptyModel = new WorkPlatformAccountModels()
+            {
+                Phones = db.PhoneModels.Where(m => m.AccountNumber == -1),
+
+                Invoices = db.InvoiceModels.Where(m => m.AccountNumber == -1),
+
+                Notes = db.NotesModels.Where(m => m.AccountNumber == -1),
+
+                Check = false,
+
+                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == user_client.ClientID)
+            };
+
             var model = new WorkPlatformAccountModels()
             {
                 Account = db.WorkPlatformModels.Find(id),
@@ -43,14 +60,25 @@ namespace CallCenter.Controllers
 
                 Check = true,
 
-                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == "TEST01")
+                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == user_client.ClientID)
             };
+
 
             if (model.Account is null)
             {
                 model.Check = false;
             }
-
+            else
+            {
+                if (model.Account.ClientID == user_client.ClientID)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    return View(emptyModel);
+                }
+            }
             return View(model);
         }
 

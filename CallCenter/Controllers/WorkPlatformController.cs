@@ -26,6 +26,22 @@ namespace CallCenter.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            string user_name = User.Identity.GetUserName();
+            var user_desk = db.UserDeskModels.SingleOrDefault(b => b.UserEmail == user_name);
+
+            var emptyModel = new WorkPlatformAccountModels()
+            {
+                Phones = db.PhoneModels.Where(m => m.AccountNumber == -1),
+
+                Invoices = db.InvoiceModels.Where(m => m.AccountNumber == -1),
+
+                Notes = db.NotesModels.Where(m => m.AccountNumber == -1),
+
+                Check = false,
+
+                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk)
+            };
+
             var model = new WorkPlatformAccountModels()
             {
                 Account = db.WorkPlatformModels.Find(id),
@@ -40,14 +56,24 @@ namespace CallCenter.Controllers
 
                 Check = true,
 
-                Inventory = db.WorkPlatformModels.Where(m => m.ClientID == "TEST01")
+                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk)
             };
 
             if(model.Account is null)
             {
                 model.Check = false;
             }
-
+            else
+            {
+                if ((model.Account.Desk == user_desk.Desk) | (User.IsInRole("Admin")))
+                {
+                    return View(model);
+                }
+                else
+                {
+                    return View(emptyModel);
+                }
+            }
             return View(model);
         }
         [HttpPost]

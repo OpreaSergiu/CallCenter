@@ -27,7 +27,7 @@
                     @foreach (var item in Model.Inventory)
                     {
                         <tr>
-                            <td class="filterable-cell"><a href=" @Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Id)</a></td>
+                            <td class="filterable-cell"><a href="/ClientPortal/Audit/@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Id)</a></td>
                             <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ClientReference)</td>
                             <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ClientID)</td>
                             <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Name)</td>
