@@ -137,16 +137,16 @@
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.Notes)
-                                    {
-                                        <tr>
-                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.NoteDate)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.UserCode)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ActionCode)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Desk)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Note)</td>
-                                        </tr>
-                                    }
+                    {
+                        <tr>
+                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.NoteDate)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.UserCode)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.ActionCode)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Desk)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Note)</td>
+                        </tr>
+    }
                                 </tbody>
                             </table>
                         </div>
@@ -164,16 +164,16 @@
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model.Invoices)
-                                    {
-                                        <tr>
-                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Invoice)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Amount)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Due)</td>
-                                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
-                                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
-                                        </tr>
-                                    }
+                    {
+                        <tr>
+                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.InvoiceDate)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Invoice)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Amount)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Due)</td>
+                            <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
+                            <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
+                        </tr>
+    }
                                 </tbody>
                             </table>
                         </div>
@@ -213,6 +213,14 @@
                             </table>
                         </div>
                     </div>
+                    @if (Url.RequestContext.RouteData.Values["id"] is null)
+                    {
+
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Generate Notes Report.", "GenerateNotesRerport", new { id = Model.Account.Id })
+                    }
                 </div>
             </div>
         </div>

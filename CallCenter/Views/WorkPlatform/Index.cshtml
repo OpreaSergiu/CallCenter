@@ -175,7 +175,7 @@ else
                                         <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Status)</td>
                                         <td class="filterable-cell" style="word-break: keep-all;">@Html.DisplayFor(modelItem => item.DueDate)</td>
                                         <td>
-                                            @if (item.PaymentRequestFlag)
+                                            @if ((item.PaymentRequestFlag) | (Model.Account.Status == "CLOSED"))
                                             {
                                                 if (item.PostedFlag)
                                                 {
@@ -183,7 +183,14 @@ else
                                                 }
                                                 else
                                                 {
-                                                    <p>Awaiting Approval!</p>
+                                                    if(Model.Account.Status == "CLOSED")
+                                                    {
+                                                        <p>Account Closed!</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Awaiting Approval!</p>
+                                                    }
                                                 }
                                             }
                                             else
@@ -245,7 +252,7 @@ else
 {
     if (Model.Check)
     {
-        if (Model.Account.Status != "CLOSE")
+        if (Model.Account.Status != "CLOSED")
         {
             <hr />
             <div align="center">
@@ -260,7 +267,7 @@ else
                     </select>
                     <select class="form-control" id="status" name="status">
                         <option>OPEN</option>
-                        <option>CLOSE</option>
+                        <option>CLOSED</option>
                         <option>PENDING</option>
                         <option>HOLD</option>
                     </select>

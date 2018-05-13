@@ -131,7 +131,7 @@ namespace CallCenter.Controllers
             newPayment.ClientID = AccModel.ClientID;
             newPayment.ClientReference = AccModel.ClientReference;
             newPayment.Invoice = InvModel.Invoice;
-            newPayment.Amount = InvModel.Amount;
+            newPayment.Amount = InvModel.Due;
             newPayment.PaymentDate = currentDate;
             newPayment.Approve = false;
             newPayment.PostedFlag = false;

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,6 +24,5 @@ namespace CallCenter.Controllers
         {
             return View(db.LoginLogsModels.OrderByDescending(s => s.Id).ToList());
         }
-
     }
 }

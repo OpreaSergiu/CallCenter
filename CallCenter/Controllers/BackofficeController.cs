@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,13 +19,103 @@ namespace CallCenter.Controllers
         {
             return View();
         }
+
+        private string run_cmd(string cmd, string args)
+        {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = @"C:\Users\Sergiu\AppData\Local\Programs\Python\Python36-32\python.exe";
+            start.CreateNoWindow = true;
+            start.Arguments = string.Format("{0} {1}", cmd, args);
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    //Console.Write(result);
+                    process.WaitForExit();
+                    return result;
+                }
+            }
+        }
+
+        [HttpGet]
         public ActionResult Trust()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Trust(HttpPostedFileBase postedFile)
+        {
+            if (postedFile != null)
+            {
+                string path = Server.MapPath("~/TrustFiles/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                postedFile.SaveAs(path + Path.GetFileName(postedFile.FileName));
+                ViewBag.Message = "File uploaded successfully.";
+
+                string fullFilePath = path + Path.GetFileName(postedFile.FileName);
+                string fullScriptPath = Server.MapPath("~/TrustScrips/") + "\\trust.py";
+
+                var textResult = run_cmd(fullScriptPath, fullFilePath);
+
+                string[] results = textResult.Split(null);
+
+                ViewBag.Message2 = results[0];
+                ViewBag.Message3 = results[1];
+
+                //if (System.IO.File.Exists(path + Path.GetFileName(postedFile.FileName)))
+                //{
+                //    System.IO.File.Delete(path + Path.GetFileName(postedFile.FileName));
+                //}
+            }
+
+            return View("Trust");
+        }
+
+        [HttpGet]
         public ActionResult NewBusiness()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewBusiness(HttpPostedFileBase postedFile)
+        {
+            if (postedFile != null)
+            {
+                string path = Server.MapPath("~/NewBusinessFiles/");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                postedFile.SaveAs(path + Path.GetFileName(postedFile.FileName));
+                ViewBag.Message = "File uploaded successfully.";
+
+                string fullFilePath = path + Path.GetFileName(postedFile.FileName);
+                string fullScriptPath = Server.MapPath("~/NewBusinessScripts/") + "\\newbusiness.py";
+
+                var textResult = run_cmd(fullScriptPath, fullFilePath);
+
+                string[] results = textResult.Split(null);
+
+                ViewBag.Message2 = results[0];
+                ViewBag.Message3 = results[1];
+
+                //if (System.IO.File.Exists(path + Path.GetFileName(postedFile.FileName)))
+                //{
+                //    System.IO.File.Delete(path + Path.GetFileName(postedFile.FileName));
+                //}
+            }
+
+            return View("NewBusiness");
         }
 
         public ActionResult PaymentRequest()
@@ -50,7 +142,7 @@ namespace CallCenter.Controllers
 
             if (invouce_due == PayModel.Amount)
             {
-                NewAccountStatus = "CLOSE";
+                NewAccountStatus = "CLOSED";
             }
 
             float NewTotalDue = AccModel.TotalDue - PayModel.Amount;
@@ -61,6 +153,7 @@ namespace CallCenter.Controllers
             {
                 result.Due = NewInvoiceDue;
                 result.Status = NewInvoiceStatus;
+                result.PostedFlag = true;
                 db.SaveChanges();
             }
 

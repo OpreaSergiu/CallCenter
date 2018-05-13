@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -100,6 +102,44 @@ namespace CallCenter.Controllers
             }
 
             return RedirectToAction("Payments");
+        }
+
+        private string run_cmd(string cmd, string args)
+        {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = @"C:\Users\Sergiu\AppData\Local\Programs\Python\Python36-32\python.exe";
+            start.CreateNoWindow = true;
+            start.Arguments = string.Format("{0} {1}", cmd, args);
+            start.UseShellExecute = false;
+            start.RedirectStandardOutput = true;
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string result = reader.ReadToEnd();
+                    //Console.Write(result);
+                    process.WaitForExit();
+                    return result;
+                }
+            }
+        }
+
+        public FileResult GenerateNotesRerport(string id)
+        {
+            var filePath = Server.MapPath("~/ReportingFolder/") + "\\Notes_Rerpot.xlsx";
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            string fullScriptPath = Server.MapPath("~/ReportingScripts/") + "\\notesreport.py";
+
+            var textResult = run_cmd(fullScriptPath, id);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
+            string fileName = "Notes_Rerpot.xlsx";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }
