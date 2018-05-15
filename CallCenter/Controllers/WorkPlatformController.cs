@@ -43,7 +43,7 @@ namespace CallCenter.Controllers
 
                 Check = false,
 
-                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk)
+                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk).Where(m => m.Status != "CLOSED")
             };
 
             var model = new WorkPlatformAccountModels()
@@ -60,7 +60,7 @@ namespace CallCenter.Controllers
 
                 Check = true,
 
-                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk)
+                Inventory = db.WorkPlatformModels.Where(m => m.Desk == user_desk.Desk).Where(m => m.Status != "CLOSED")
             };
 
             if(model.Account is null)
