@@ -90,7 +90,10 @@ namespace CallCenter.Controllers
         }
         public ActionResult Payments()
         {
-            return View(db.PaymentsModels.ToList());
+            string user_name = User.Identity.GetUserName();
+            var user_client = db.UserClientIdModels.SingleOrDefault(b => b.UserEmail == user_name);
+
+            return View(db.PaymentsModels.Where(m => m.ClientID == user_client.ClientID).OrderByDescending(s => s.Id).ToList());
         }
         public ActionResult ApprovePayment(int id)
         {
@@ -139,6 +142,46 @@ namespace CallCenter.Controllers
 
             byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
             string fileName = "Notes_Rerpot.xlsx";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult GenerateInventoryRerport()
+        {
+            string user_name = User.Identity.GetUserName();
+            var filePath = Server.MapPath("~/ReportingFolder/") + "\\Inventory_Rerpot.xlsx";
+            var user_client = db.UserClientIdModels.SingleOrDefault(b => b.UserEmail == user_name);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            string fullScriptPath = Server.MapPath("~/ReportingScripts/") + "\\inventoryreport.py";
+
+            var textResult = run_cmd(fullScriptPath, user_client.ClientID);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
+            string fileName = "Inventory_Rerpot.xlsx";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public FileResult GenerateRecoveryRerport()
+        {
+            string user_name = User.Identity.GetUserName();
+            var filePath = Server.MapPath("~/ReportingFolder/") + "\\Recovery_Rerpot.xlsx";
+            var user_client = db.UserClientIdModels.SingleOrDefault(b => b.UserEmail == user_name);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
+            string fullScriptPath = Server.MapPath("~/ReportingScripts/") + "\\recoveryreport.py";
+
+            var textResult = run_cmd(fullScriptPath, user_client.ClientID);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(@filePath);
+            string fileName = "Recovery_Rerpot.xlsx";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }

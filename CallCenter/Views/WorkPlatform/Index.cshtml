@@ -108,7 +108,7 @@ else
                                 <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Prefix)</td>
                                 <td class="filterable-cell">@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                                 <td class="filterable-cell">@Html.DisplayFor(modelItem => item.Extension) </td>
-                                <td class="filterable-cell"><button type="button" class="btn btn-primary" onclick="myFunction()">Call</button></td>
+                                <td class="filterable-cell">@Html.ActionLink("CALL", "makeCall", new { id = item.Id , account_number = Model.Account.Id})</td>
                             </tr>
                         }
                     </tbody>

@@ -80,29 +80,30 @@ namespace CallCenter.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             var user = await UserManager.FindAsync(model.Email, model.Password);
 
-            var LogForAdd = new LoginLogsModels();
-            var currentDate = DateTime.Now;
-
-            LogForAdd.LoginDate = currentDate;
-            LogForAdd.UserEmail = model.Email;
-
-            if (UserManager.IsInRole(user.Id, "Admin"))
-                LogForAdd.UserRole = "Admin";
-            else if (UserManager.IsInRole(user.Id, "Backoffice"))
-                LogForAdd.UserRole = "Backoffice";
-            else if (UserManager.IsInRole(user.Id, "Client"))
-                LogForAdd.UserRole = "Client";
-            else if (UserManager.IsInRole(user.Id, "User"))
-                LogForAdd.UserRole = "User";
-            else
-                LogForAdd.UserRole = " ";
-
-            db.LoginLogsModels.Add(LogForAdd);
-            db.SaveChanges();
-
             switch (result)
             {
                 case SignInStatus.Success:
+
+                    var LogForAdd = new LoginLogsModels();
+                    var currentDate = DateTime.Now;
+
+                    LogForAdd.LoginDate = currentDate;
+                    LogForAdd.UserEmail = model.Email;
+
+                    if (UserManager.IsInRole(user.Id, "Admin"))
+                        LogForAdd.UserRole = "Admin";
+                    else if (UserManager.IsInRole(user.Id, "Backoffice"))
+                        LogForAdd.UserRole = "Backoffice";
+                    else if (UserManager.IsInRole(user.Id, "Client"))
+                        LogForAdd.UserRole = "Client";
+                    else if (UserManager.IsInRole(user.Id, "User"))
+                        LogForAdd.UserRole = "User";
+                    else
+                        LogForAdd.UserRole = " ";
+
+                    db.LoginLogsModels.Add(LogForAdd);
+                    db.SaveChanges();
+
 
                     if (UserManager.IsInRole(user.Id, "Admin"))
                         return RedirectToLocal("/Admin/Index/");

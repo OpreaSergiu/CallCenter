@@ -11,6 +11,10 @@ using CallCenter.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using Microsoft.AspNet.Identity;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+using System.Configuration;
 
 namespace CallCenter.Controllers
 {
@@ -141,6 +145,28 @@ namespace CallCenter.Controllers
 
             string redirectUrl = "/WorkPlatform/Index/" + AccModel.Id;
 
+            return Redirect(redirectUrl);
+        }
+
+        public ActionResult makeCall(int id, int account_number)
+        {
+            // Your Account SID from twilio.com/console
+            //var accountSid = "ACb3690ddd6599d49e82d570485b075b2c";
+            // Your Auth Token from twilio.com/console
+            //var authToken = "653fd04166cb23a94e5acfd464eff1f5"; 
+
+            TwilioClient.Init(ConfigurationManager.AppSettings["TwilioAccountSID"], ConfigurationManager.AppSettings["TwilioAuthToken"]);
+
+            var Phones = db.PhoneModels.Find(id);
+
+            var caller_number = Phones.Prefix + Phones.PhoneNumber;
+
+            var to = new PhoneNumber(caller_number);
+            var from = new PhoneNumber("+40316306894");
+            var call = CallResource.Create(to, from,
+               url: new Uri("http://demo.twilio.com/docs/voice.xml"));
+
+            string redirectUrl = "/WorkPlatform/Index/" + account_number;
             return Redirect(redirectUrl);
         }
     }

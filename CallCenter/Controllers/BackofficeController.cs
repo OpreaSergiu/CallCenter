@@ -120,7 +120,7 @@ namespace CallCenter.Controllers
 
         public ActionResult PaymentRequest()
         {
-            return View(db.PaymentsModels.ToList());
+            return View(db.PaymentsModels.ToList().OrderByDescending(s => s.Id));
         }
 
         public ActionResult PaymentPost(int id)
@@ -140,7 +140,7 @@ namespace CallCenter.Controllers
 
             string NewAccountStatus = AccModel.Status;
 
-            if (invouce_due == PayModel.Amount)
+            if (AccModel.TotalDue == PayModel.Amount)
             {
                 NewAccountStatus = "CLOSED";
             }

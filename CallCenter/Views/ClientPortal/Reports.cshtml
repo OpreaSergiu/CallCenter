@@ -2,22 +2,24 @@
 @{
     ViewBag.Title = "Reports";
 }
-<br>
+<br/>
 <div class="row content">
     <div class="col-sm-4 text-left">
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">Inventory Report</button>
         <div id="demo1" class="collapse">
             Report that contains basic informations about the whole inventory (Account number, Client reference, Desk, Status, Total assign, Total due)
-            <br>
-            <button type="button" class="btn btn-primary">Create Report</button>
+            <br/>
+            <br/>
+            @Html.ActionLink("Generate Inventory Report.", "GenerateInventoryRerport")
         </div>
         <br>
         <br>
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">Recovery report</button>
         <div id="demo2" class="collapse">
-            Recovery report containing charts for last 12 months including current.
-            <br>
-            <button type="button" class="btn btn-primary">Create Report</button>
+            Recovery report containing charts showing recovery percent by status and account details.
+            <br/>
+            <br/>
+            @Html.ActionLink("Generate Recovery Report.", "GenerateRecoveryRerport")
         </div>
     </div>
 </div>
