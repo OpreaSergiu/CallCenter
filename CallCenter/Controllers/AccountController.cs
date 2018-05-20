@@ -104,7 +104,6 @@ namespace CallCenter.Controllers
                     db.LoginLogsModels.Add(LogForAdd);
                     db.SaveChanges();
 
-
                     if (UserManager.IsInRole(user.Id, "Admin"))
                         return RedirectToLocal("/Admin/Index/");
                     else if (UserManager.IsInRole(user.Id, "Backoffice"))

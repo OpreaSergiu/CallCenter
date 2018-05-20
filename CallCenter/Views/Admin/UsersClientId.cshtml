@@ -1,0 +1,39 @@
+﻿@model IEnumerable<CallCenter.Models.UserClientIdModels>
+@{
+    ViewBag.Title = "UsersClientId";
+}
+
+<hr />
+@Html.ActionLink("Back To Admin Console", "Index")
+<hr />
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditClientId", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
