@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ClientPortalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\WorkPlatformController.cs" />
     <Compile Include="C__MigrationHistory.cs" />
     <Compile Include="Global.asax.cs">
@@ -235,6 +236,14 @@
     <Compile Include="Migrations\201805121928203_AddUrl2.Designer.cs">
       <DependentUpon>201805121928203_AddUrl2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805221055051_AddUrl3.cs" />
+    <Compile Include="Migrations\201805221055051_AddUrl3.Designer.cs">
+      <DependentUpon>201805221055051_AddUrl3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805221124405_AddUrl4.cs" />
+    <Compile Include="Migrations\201805221124405_AddUrl4.Designer.cs">
+      <DependentUpon>201805221124405_AddUrl4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddressModels.cs" />
@@ -245,6 +254,7 @@
     <Compile Include="Models\NotesModels.cs" />
     <Compile Include="Models\PaymentsModels.cs" />
     <Compile Include="Models\PhoneModels.cs" />
+    <Compile Include="Models\SurveyModels.cs" />
     <Compile Include="Models\UserClientIdModels.cs" />
     <Compile Include="Models\UserDeskModels.cs" />
     <Compile Include="Models\WorkPlatformAccountModels.cs" />
@@ -378,6 +388,7 @@
     <Content Include="Views\Admin\EditClientId.cshtml" />
     <Content Include="Views\Admin\UserRoles.cshtml" />
     <Content Include="Views\Admin\SingelUserRoles.cshtml" />
+    <Content Include="Views\Survey\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -409,6 +420,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805121928203_AddUrl2.resx">
       <DependentUpon>201805121928203_AddUrl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805221055051_AddUrl3.resx">
+      <DependentUpon>201805221055051_AddUrl3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805221124405_AddUrl4.resx">
+      <DependentUpon>201805221124405_AddUrl4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

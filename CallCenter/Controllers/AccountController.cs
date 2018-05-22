@@ -104,14 +104,28 @@ namespace CallCenter.Controllers
                     db.LoginLogsModels.Add(LogForAdd);
                     db.SaveChanges();
 
-                    if (UserManager.IsInRole(user.Id, "Admin"))
+                    var check = db.SurveyModels.Where(s => s.UserEmail == model.Email).SingleOrDefault();
+
+                        if (UserManager.IsInRole(user.Id, "Admin"))
                         return RedirectToLocal("/Admin/Index/");
                     else if (UserManager.IsInRole(user.Id, "Backoffice"))
                         return RedirectToLocal("/BackOffice/Index/");
                     else if (UserManager.IsInRole(user.Id, "Client"))
                         return RedirectToLocal("/ClientPortal/Index/");
                     else if (UserManager.IsInRole(user.Id, "User"))
+                    {
+                        if (check == null)
+                        {
+                            var user_desk = db.UserDeskModels.Where(s => s.UserEmail == model.Email).SingleOrDefault().Desk;
+                            var closed_accounts = db.WorkPlatformModels.Where(s => s.Status == "CLOSED").Where(d => d.Desk == user_desk).Count();
+
+                            if (closed_accounts >= 3)
+                            {
+                                return RedirectToLocal("/Survey/Index/");
+                            }
+                        }
                         return RedirectToLocal("/WorkPlatform/Index/");
+                    }
                     else
                         return RedirectToLocal("/Home/Index/");
 
